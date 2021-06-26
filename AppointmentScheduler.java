@@ -3,6 +3,7 @@ import java.util.*;
 import java.awt.event.*;
 import javax.swing.*;
 
+
 class DatePicker {
 	int month = java.util.Calendar.getInstance().get(java.util.Calendar.MONTH);
 	int year = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);;
@@ -10,6 +11,8 @@ class DatePicker {
 	String day = "";
 	JDialog d;
 	JButton[] button = new JButton[49];
+   
+   String professor;
 
 	public DatePicker(JFrame parent) {
 		d = new JDialog();
@@ -81,11 +84,18 @@ class DatePicker {
 		if (day.equals(""))
 			return day;
 		java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat(
-				"dd-MM-yyyy");
+				"MM-dd-yyyy");
 		java.util.Calendar cal = java.util.Calendar.getInstance();
 		cal.set(year, month, Integer.parseInt(day));
 		return sdf.format(cal.getTime());
 	}
+   public void setProf(String prof){
+     professor = prof;
+   }
+   
+   public String getProf(){
+   return professor;
+   }
 }
 
 class Picker {
@@ -103,6 +113,7 @@ class Picker {
   
    case 1:
    System.out.println("You chose to meet with Mr. Shorter.");
+   DatePicker.setProf("Mr. Shorter");
    System.out.println();
    break;
   
@@ -155,7 +166,10 @@ class Picker {
 		f.setVisible(true);
 		b.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-				text.setText(new DatePicker(f).setPickedDate());
+				
+            
+            String Bookedapt = new DatePicker(f).setPickedDate();
+            System.out.println("Your appointment with " + getProf());
 			}
 		});
 	}
